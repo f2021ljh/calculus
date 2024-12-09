@@ -1,0 +1,436 @@
+\documentclass{ctexart}
+
+\input{../../preamble}
+\input{../../preamble-zh}
+
+\date{2024年12月}
+\title{微积分第六章练习题（一）}
+
+\begin{document}
+
+\maketitle
+
+\renewcommand{\thedefinition}{\arabic{definition}}
+\renewcommand{\thetheorem}{\arabic{theorem}}
+\renewcommand{\theexercise}{\arabic{exercise}}
+
+\begin{definition}[定积分]
+    \[
+        \int_a^bf(x)\dx=\lim_{\la\to0}\sum_{i=1}^nf(\xi_i)\De x_i,
+    \] 其中 $a=x_0<x_1<\dots<x_{n-1}<x_n=b$, $x_{i-1}\le\xi_i\le x_i$, $\De x_i=x_i-x_{i-1}$, $\la=\max\limits_{1\le i\le n}\{|\De x_i|\}$, 且 $x_i(i=1,2,\dots,n-1),\xi_i(i=1,2,\dots,n)$ 的取法不影响得到的定积分值.
+\end{definition}
+
+将区间 $[a,b]$ 进行 $n$ 等分, 则 $\De x_i=\df{b-a}n$, $x_i=a+\df{i(b-a)}n$, $i=1,2,\dots,n$. 若取 $\xi_i=x_i$, 则有 \[
+    \int_a^bf(x)\dx=\lin\fr{b-a}n\sum_{i=1}^nf\left(a+\fr{i(b-a)}n\right).\eqtag\label{eq:1}
+\] 特别地, 取 $a=0,b=1$ 有 \[
+    \int_0^1f(x)\dx=\lin\fr1n\sum_{i=1}^nf\left(\fr in\right).\eqtag\label{eq:2}
+\] 若取 $\xi_i=\df{x_{i-1}+x_i}2$, $x_i=a+\df{(2i-1)(b-a)}{2n}$, 则有 \[
+    \int_a^bf(x)\dx=\lin\fr{b-a}n\sum_{i=1}^nf\left(a+\fr{(2i-1)(b-a)}{2n}\right).\eqtag\label{eq:3}
+\] 特别地, 取 $a=0,b=1$ 有 \[
+    \int_0^1f(x)\dx=\lin\fr1n\sum_{i=1}^nf\left(\fr{2i-1}{2n}\right).\eqtag\label{eq:4}
+\]
+
+\begin{exercise}
+    计算极限 $L=\lin\df1n\left(\sqrt{1+\cos\df\uppi n}+\sqrt{1+\cos\df{2\uppi}n}+\dots+\sqrt{1+\cos\df{n\uppi}n}\right)$.
+\end{exercise}
+
+\begin{solution}
+    应用 \eqref{eq:1} 式, 取 $a=0,b=\uppi$, $x_i=\df{i\uppi}n$, $\xi_i=x_i$, 有 \[\begin{aligned}
+        L&=\fr1\uppi\lin\fr\uppi n\sum_{i=1}^n\sqrt{1+\cos\fr{i\uppi}n}\\
+        &=\fr1\uppi\int_0^\uppi\sqrt{1+\cos x}\dx\\
+        &=\fr1\uppi\int_0^\uppi\sqrt{2\cos^2\fr x2}\dx=\fr{\sqrt2}\uppi\int_0^\uppi\cos\fr x2\dx\\
+        &=\fr{2\sqrt2}\uppi\sin\fr x2\ver0\uppi=\fr{2\sqrt2}\uppi.
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lin\displaystyle\sum_{i=1}^n\df i{\left(n+\sqrt i\right)^2}\ln\left(1+\df in\right)$.
+\end{exercise}
+
+\begin{solution}
+    夹挤准则. 由 \[
+        \fr i{n^2}<\fr i{\left(n+\sqrt i\right)^2}<\fr i{\left(n+\sqrt n\right)^2},
+    \] 有 \[
+        A=\lin\sum_{i=1}^n\fr i{n^2}\ln\left(1+\fr in\right)<L<\lin\sum_{i=1}^n\fr i{\left(n+\sqrt n\right)^2}\ln\left(1+\fr in\right)=B.
+    \] 又由 \eqref{eq:2} 式有 \[\begin{aligned}
+        A&=\lin\fr1n\sum_{i=1}^n\fr in\ln\left(1+\fr in\right)=\int_0^1x\ln(1+x)\dx\\
+        &=\fr12\left(x^2\ln(1+x)\ver01-\int_0^1\fr{x^2}{1+x}\dx\right)\\
+        &=\fr12\left(\ln2-\int_0^1\left(x-1+\fr1{1+x}\right)\dx\right)\\
+        &=\fr12\left(\ln2-\left[\fr12x^2-x+\ln(1+x)\right]\ver01\right)=\fr14,
+    \end{aligned}\] \[
+        B=\lin\fr{n^2}{\left(n+\sqrt n\right)^2}\cdot\lin\fr1n\sum_{i=1}^n\fr in\ln\left(1+\fr in\right)=1\cdot A=\fr14,
+    \] 因此 $L=\df14$.
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lin\df1{n^2}\displaystyle\sum_{k=1}^n\arctan\df{2k-n}n$.
+\end{exercise}
+
+\begin{solution}
+    \[\begin{aligned}
+        L&=\lin\fr n{n+\sqrt[3]n+100}\cdot\lin\fr1n\sum_{k=1}^n\arctan\left(2\fr kn-1\right)&\\
+        &=\lin\fr1n\sum_{k=1}^n\arctan\left(2\fr kn-1\right)&\\
+        &=\int_0^1\arctan(2x-1)\dx&(\text{应用 \eqref{eq:2} 式})\\
+        &\xle{2x-1=t}\fr12\int_{-1}^1\arctan t\dt=0.&(\text{$\arctan t$ 为奇函数})
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lin\df1{n^2}\displaystyle\sum_{k=1}^n(2k-1)\sin\df{2k-1}{2n}$.
+\end{exercise}
+
+\begin{solution}
+    应用 \eqref{eq:4} 式, 则有 \begin{align*}
+        L&=2\lin\fr1n\sum_{k=1}^n\fr{2k-1}{2n}\sin\fr{2k-1}{2n}\\
+        &=2\int_0^1x\sin x\dx=2(\sin x-x\cos x)\ver01=2(\sin1-\cos1).
+    \end{align*}
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lin\df{\sqrt[n]{(n+1)(n+2)\cdots(n+n)}}n$.
+\end{exercise}
+
+\begin{solution}
+    \[\begin{aligned}
+        L&=\lin\sqrt[n]{\left(1+\fr1n\right)\left(1+\fr2n\right)\cdots\left(1+\fr nn\right)}\\
+        &=\exp\lin\fr1n\sum_{i=1}^n\ln\left(1+\fr in\right)\\
+        &=\exp\int_0^1\ln(1+x)\dx\\
+        &=\exp[(1+x)\ln(1+x)-(1+x)]\ver01=\e^{2\ln2-1}=\fr4\e.
+    \end{aligned}\]
+\end{solution}
+
+去掉积分号的两个方法:
+
+\begin{theorem}[变限积分求导公式]
+    \[
+        \left(\int_{\ph(t)}^{\ps(t)}f(t)\dt\right)'=f(\ps(x))\ps'(x)-f(\ph(x))\ph'(x).
+    \]
+\end{theorem}
+
+\begin{theorem}[定积分中值定理]
+    设 $f(x)\in C[a,b]$, 则至少存在一点 $\xi\in[a,b]$, 使 \[
+        \int_a^bf(x)\dx=f(\xi)(b-a).
+    \]
+\end{theorem}
+
+\begin{exercise}
+    计算极限 $L=\lix0\df{\int_0^{x^2}(1-\sin2t)^{1/t}\dt}{(\e^x-1)\ln(1+\arctan x)}$.
+\end{exercise}
+
+\begin{solution}
+    \[\begin{aligned}
+        L&=\lix0\fr{\int_0^{x^2}(1-\sin2t)^{1/t}\dt}{x^2}&(\text{等价无穷小代换})\\
+        &=\lix0\frac{(1-\sin2x^2)^{1/x^2}(2x)}{2x}&(\text{洛必达法则})\\
+        &=\lix0(1-\sin2x^2)^{1/x^2}&\\
+        &=\exp\lix0\fr{\ln(1-\sin2x^2)}{x^2}&\\
+        &=\exp\lix0\fr{-\sin2x^2}{x^2}=\exp\lix0\fr{-2x^2}{x^2}&(\text{等价无穷小代换})\\
+        &=\e^{-2}.&
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lix0\df{\int_0^x\left(\int_0^{u^2}\arctan(1+t)\dt\right)\du}{x(1-\cos x)}$.
+\end{exercise}
+
+\begin{solution}
+    \[\begin{aligned}
+        L&=\lix0\fr{\int_0^x\left(\int_0^{u^2}\arctan(1+t)\dt\right)\du}{\fr12x^3}\\
+        &\xle{\text{洛}}\lix0\fr{\int_0^{x^2}\arctan(1+t)\dt}{\fr32x^2}\\
+        &\xle{\text{洛}}\lix0\fr{2x\arctan(1+x^2)}{3x}\\
+        &=\fr23\lix0\arctan(1+x^2)=\fr23\cdot\fr\uppi4=\fr\uppi6.
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    计算极限 $L=\lix{0^+}\df{\int_0^x\e^t\sqrt{x-t}\dt}{\sqrt{x^3}}$.
+\end{exercise}
+
+\begin{solution}
+    首先有 \[
+        \int_0^x\e^t\sqrt{x-t}\dt\xle{\sqrt{x-t}=u}\int_{\sqrt x}^0\e^{x-u^2}u(-2u\du)=2\e^x\int_0^{\sqrt x}u^2\e^{-u^2}\du.
+    \] 注意被积函数中不能含有 $x$. 于是 \[\begin{aligned}
+        L&=\lix{0^+}\fr{2\e^x\int_0^{\sqrt x}u^2\e^{-u^2}\du}{x^{3/2}}=2\lix{0^+}\e^x\cdot\lix{0^+}\fr{\int_0^{\sqrt x}u^2\e^{-u^2}\du}{x^{3/2}}\\
+        &\xle{\text{洛}}2\lix{0^+}\fr{x\e^{-x}\cdot\fr1{2\sqrt x}}{\fr32\sqrt x}=\fr23.
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 可导, 且 $f(0)=0,f'(0)=0$, 求 $L=\lix0\df{\int_0^xtf(x^2-t^2)\dt}{(1-\cos x)\left(\sqrt{1+x^2}-1\right)}$.
+\end{exercise}
+
+\begin{solution}
+    为了准备应用洛必达法则, 先求出分子的导数: \[\begin{aligned}
+        \fr\dd\dx\int_0^xtf(x^2-t^2)\dt&\xle{x^2-t^2=u}\fr\dd\dx\int_{x^2}^0\sqrt{x^2-u}f(u)\left(\fr{-\du}{2\sqrt{x^2-u}}\right)\\
+        &=\fr12\fr\dd\dx\int_0^{x^2}f(u)\du\\
+        &=\fr12f(x^2)(2x)=xf(x^2).
+    \end{aligned}\] 于是 \[\begin{aligned}
+        L&=\lix0\fr{\int_0^xtf(x^2-t^2)\dt}{\fr14x^4}\\
+        &\xle{\text{洛}}\lix0\fr{xf(x^2)}{x^3}=\lix0\fr{f(x^2)}{x^2}\\
+        &=f'(0)=0.
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)\in C(-\infty,+\infty)$, $f(0)\ne0$, 计算极限 \[
+        L=\lix0\fr{\int_0^xtf(x-t)\dt}{\int_0^xxf(x-t)\dt}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    \[\begin{aligned}
+        L&\xle{x-t=u}\lix0\fr{\int_x^0(x-u)f(u)(-\du)}{x\int_x^0f(u)(-\du)}\\
+        &=\lix0\fr{x\int_0^xf(u)\du-\int_0^xuf(u)\du}{x\int_0^xf(u)\du}\\
+        &\xle{洛}\lix0\fr{xf(x)+\int_0^xf(u)\du-xf(x)}{xf(x)+\int_0^xf(u)\du}\\
+        &=\lix0\fr{\int_0^xf(u)\du}{xf(x)+\int_0^xf(u)\du}\\
+        &=\lix0\fr{xf(\xi)}{xf(x)+xf(\xi)}\quad(\text{$\xi$ 介于 $0$ 和 $x$ 之间})&(\text{定积分中值定理})\\
+        &=\fr12.
+    \end{aligned}\]
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)\in C[0,1]$, $f(x)=x^2+2\sqrt x\dint_0^1f(x)\dx$, 求 $f(x)$.
+\end{exercise}
+
+\begin{solution}
+    设 $\dint_0^f(x)\dx=A$, 题中式子两边取 $[0,1]$ 的定积分得 \[
+        A=\dint(x^2+2A\sqrt x)\dx=\left(\fr13x^3+2A\fr23x^{3/2}\right)\ver01=\fr13+\fr43A,
+    \] 解得 $A=-1$, 故 $f(x)=x^2-2\sqrt x$.
+\end{solution}
+
+\begin{exercise}
+    连续函数 $f(x)$ 满足 $f(x)-\cos^2x=\df1\uppi\dint_0^{\uppi/4}f(2t)\dt$, 计算 $\dint_0^{\uppi/2}f(x)\dx$.
+\end{exercise}
+
+\begin{solution}
+    首先右侧令 $2t=x$ 得 $\dint_0^{\uppi/4}f(2t)\dt=\df12\dint_0^{\uppi/2}f(x)\dx$. 设 $\dint_0^{\uppi/2}f(x)\dx=A$, 两边取 $\left[0,\df\uppi2\right]$ 的定积分得 \[
+        A-\int_0^{\uppi/2}\cos^2x\dx=\int_0^{\uppi/2}\fr1{2\uppi}A\dx,
+    \] 即 \[
+        A-\left(\fr12x-\fr14\sin2x\right)\vec0{\uppi/2}=\fr A{2\uppi}x\ver0{\uppi/2},
+    \] 即 \[
+        A-\fr\uppi4=\fr A4,
+    \] 解得 \[
+        A=\fr\uppi3.
+    \]
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 连续, 且 $\dint_0^x\e^{f(x)}\dx=x\e^{2x}-x^2f'(0)$, 求 $f(x)$.
+\end{exercise}
+
+\begin{solution}
+    两边求导得 \[
+        \fr\dd\dx\int_0^x\e^{f(t)}\dt=\left[x\e^{2x}-x^2f'(0)\right]',
+    \] 即 \[
+        \e^{f(x)}=(1+2x)\e^{2x}-2f'(0)x,
+    \] 解得 \[
+        f(x)=\ln\left[(1+2x)\e^{2x}-2f'(0)x\right],
+    \] 求导得 \[
+        f'(x)=\frac{4(1+x)\e^{2x}-2f'(0)}{(1+2x)\e^{2x}-2f'(0)x}.
+    \] 于是 $f'(0)=4-2f'(0)$, 解得 $f'(0)=\df43$, 代入得 \[
+        f(x)=\ln\left[(1+2x)\e^{2x}-\fr83x\right].
+    \]
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 及其反函数 $\ph(x)$ 都可导, 且满足 $\dint_1^{f(x)}\ph(t)\dt=\df13\left(x^{3/2}-8\right)$, 求 $f(x)$.
+\end{exercise}
+
+\begin{solution}
+    两边对 $x$ 求导得 \[
+        \ph(f(x))f'(x)=\fr13\cdot\fr32x^{1/2},
+    \] 即 \[
+        xf'(x)=\fr12\sqrt x,
+    \] 即 \[
+        f'(x)=\fr1{2\sqrt x},
+    \] 于是 \[
+        f(x)=\sqrt x+C,\quad\ph(x)=(x-C)^2.
+    \] 回代得 \[
+        \int_1^{\sqrt x+C}(t-C)^2\dt=\fr13\left(x^{3/2}-8\right),
+    \] 令 $x=0$ 则 \[
+        \int_1^C(t-C)^2\dt=-\fr83,
+    \] 即 \[
+        \fr13(t-C)^3\ver1C=-\fr83,
+    \] 即 \[
+        0-(1-C)^3=-8,
+    \] 解得 $C=-1$. 因此 $f(x)=\sqrt x-1$.
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 连续, 且 $\dint_0^1f(xt)\dt=\df{x^2}3-\df x2\dint_0^2f(x)\dx+2\dint_0^1f(x)\dx$, 求 $f(x)$.
+\end{exercise}
+
+\begin{solution}
+    设 $xt=u$, 则 \[
+        \int_0^1f(xt)\dt=\int_0^xf(u)\fr1x\du=\fr1x\int_0^xf(u)\du,
+    \] 那么有 \[
+        \int_0^xf(u)\du=\fr{x^3}3-\fr{x^2}2\int_0^2f(x)\dx+2x\int_0^1f(x)\dx.
+    \] 设 $\dint_0^1f(x)\dx=A,\dint_0^2f(x)\dx=B$, 分别令 $x=0,x=1$ 得 \[\begin{aligned}
+        &A=\int_0^1f(u)\du=\left(\fr13x^3-\fr B2x^2+2Ax\right)\ver01=\fr13-\fr B2+2A,\\
+        &B=\int_0^2f(u)\du=\left(\fr13x^3-\fr B2x^2+2Ax\right)\ver02=\fr83-2B+4A,
+    \end{aligned}\] 解得 $A=\df13,B=\df43$, 因此 \[
+        f(x)=\fr\dd\dx\int_0^xf(u)\du=\fr\dd\dx\left(\fr13x^3-\fr B2x^2+2Ax\right)=x^2-Bx+2A=x^2-\fr43x+\fr23.
+    \]
+\end{solution}
+
+\begin{theorem}[定积分的保序性]
+    若在 $[a,b]$ 上恒有 $f(x)\le g(x)$, 则有 \[
+        \int_a^bf(x)\dx\le\int_a^bg(x)\dx,
+    \] 当且仅当 $f(x)\equiv g(x)$ 时两定积分相等.
+\end{theorem}
+
+\begin{exercise}
+    设 $I=\dint_0^{\uppi/4}\ln\sin x\dx$, $J=\dint_0^{\uppi/4}\ln\cot x\dx$, $K=\dint_0^{\uppi/4}\ln\cos x\dx$, 比较 $I,J,K$ 的大小.
+\end{exercise}
+
+\begin{solution}
+    $0<x<\df\uppi4$ 时, 有 $\sin x<\cos x<\cot x$, 故 $\ln\sin x<\ln\cos x<\ln\cot x$, 因此 \[
+        I<K<J.
+    \]
+\end{solution}
+
+\begin{exercise}
+    设 $M=\dint_{-\uppi/2}^{\uppi/2}\fr{(1+x)^2}{1+x^2}\dx$, $N=\dint_{-\uppi/2}^{\uppi/2}\df{1+x}{\e^x}\dx$, $K=\dint_{-\uppi/2}^{\uppi/2}\left(1+\sqrt{\cos x}\right)\dx$, 比较 $M,N,K$ 的大小.
+\end{exercise}
+
+\begin{solution}
+    首先有 \[
+        M=\int_{-\uppi/2}^{\uppi/2}\left(1+\fr{2x}{1+x^2}\right)\dx=x\ver{-\uppi/2}{\uppi/2}=\uppi.
+    \] 由于 $\e^x\ge1+x$, 当且仅当 $x=0$ 时取等, 则 $\df{1+x}{\e^x}\le1$, 故 \[
+        N<\int_{-\uppi/2}^{\uppi/2}\dx=x\ver{-\uppi/2}{\uppi/2}=\uppi.
+    \] 同理, 由于 $1+\sqrt{\cos x}\ge1$, 当且仅当 $x=\pm\df\uppi2$ 时取等, 故 $K>\uppi$. 因此 \[
+        N<M=\uppi<K.
+    \]
+\end{solution}
+
+\begin{exercise}
+    设 $I_k=\dint_0^{k\uppi}\e^{x^2}\sin x\dx$, $k=1,2,3$, 比较 $I_1,I_2,I_3$ 的大小.
+\end{exercise}
+
+\begin{solution}
+    作差得 \[
+        I_2-I_1=\int_\uppi^{2\uppi}\e^{x^2}\sin x\dx<0,
+    \] 故 $I_2<I_1$. 同理 \[
+        I_3-I_1=\int_\uppi^{3\uppi}\e^{x^2}\sin x\dx>\int_\uppi^{3\uppi}\sin x\dx=0,
+    \] 故 $I_3>I_1$. 因此 \[
+        I_2<I_1<I_3.
+    \]
+\end{solution}
+
+\begin{exercise}
+    设函数 $f(x)$ 在区间 $[a,b]$ 上连续、单调不减且不等于常数，$I_1=\dint_a^bxf(x)\dx$, $I_2=\df{a+b}2\dint_a^bf(x)\dx$, 比较 $I_1,I_2$ 的大小关系.
+\end{exercise}
+
+\begin{solution}
+    令 $F(x)=\dint_a^xtf(t)\dt-\df{a+x}2\dint_a^xf(t)\dt$, 则 $F(x)$ 在 $[a,b]$ 上可导, 且 \[\begin{aligned}
+        F'(x)&=xf(x)-\fr12\int_a^xf(t)\dt-\fr{a+x}2f(x)=\fr{x-a}2f(x)-\fr12\int_a^xf(t)\dt\\
+        &=\fr12\int_a^x\left[f(x)-f(t)\right]\dt.
+    \end{aligned}\] 由于 $f(x)$ 在 $[a,b]$ 上单调不减且不等于常数, 有 $F'(x)>0$, 故 $F(b)>F(a)=0$, 即 \[
+        \int_a^btf(t)\dt>\fr{a+b}2\int_a^bf(t)\dt.
+    \] 因此 $I_1>I_2$.
+\end{solution}
+
+\begin{exercise}
+    设 \[\begin{cases}
+        x=\cos t^2,\\
+        y=t\cos t^2-\dint_0^{t^2}\df1{2\sqrt u}\cos u\du,
+    \end{cases}\] 求 $\df\dy\dx\ver{t=\sqrt{\uppi/2}}{}$, $\df{\dd^2y}{\dx^2}\ver{t=\sqrt{\uppi/2}}{}$.
+\end{exercise}
+
+\begin{solution}
+    首先有 $x'_t=-2t\sin t^2$. 由变限积分求导公式得 \[
+        \fr\dd\dt\int_0^{t^2}\fr1{2\sqrt u}\cos u\du=2t\fr{\cos t^2}{2t}=\cos t^2,
+    \] 故 \[
+        y'_t=\cos t^2-2t^2\sin t^2-\cos t^2=-2t^2\sin t^2.
+    \] 由参数式函数求导公式得 \[
+        \fr\dy\dx=\fr{y'_t}{x'_t}=t,
+    \] 因此 $\df\dy\dx\ver{t=\sqrt{\uppi/2}}{}=\sqrt{\df\uppi2}$. 再对 $x$ 求导得 \[
+        y''_{xx}=\fr{(y'_x)'_t}{x'_t}=\fr1{-2t\sin t^2}.
+    \] 因此 $\df{\dd^2y}{\dx^2}\ver{t=\sqrt{\uppi/2}}{}=-\df1{\sqrt{2\uppi}}$.
+\end{solution}
+
+\begin{exercise}
+    设函数 $y=y(x)$ 由方程 \[\begin{cases}
+        x=t^2+t+1,\\
+        \dint_1^y\e^{u^2}\du+t\dint_1^t\cos(ut)^2\du=t^3,
+    \end{cases}\] 所确定, 求 $\df\dy\dx$.
+\end{exercise}
+
+\begin{solution}
+    首先有 $x'_t=2t+1$. 由变限积分求导公式得 \[
+        \fr\dd\dt\int_1^{y(t)}\e^{u^2}\du=\e^{y^2(t)}y'(t)=y'_t\e^{y^2}.
+    \] 又 \[
+        t\int_1^t\cos(ut)^2\du\xle{v=ut}t\int_t^{t^2}\cos v^2\cdot\fr1t\dv=\int_t^{t^2}\cos v^2\dv,
+    \] 故 \[
+        \fr\dd\dt t\int_1^t\cos(ut)^2\du=\fr\dd\dt\int_t^{t^2}\cos v^2\dv=2t\cos t^4-\cos t^2.
+    \] 因此第二个式子对 $t$ 求导得 \[
+        y'_t\e^{y^2}+2t\cos t^4-\cos t^2=3t^2,
+    \] 解得 \[
+        y'_t=\fr{3t^2-2t\cos t^4+\cos t^2}{\e^{y^2}},
+    \] 故 \[
+        \fr\dy\dx=\fr{y'_t}{x'_t}=\fr{3t^2-2t\cos t^4+\cos t^2}{\e^{y^2}(2t+1)}.
+    \]
+\end{solution}
+
+\begin{exercise}
+    证明方程 $\dint_a^x\fr{\e^t}{1+t^2}\dt+\dint_b^x\fr{\e^{-t}}{1+t^2}\dt=0$ 在区间 $(a,b)$ 内只有一个实根.
+\end{exercise}
+
+\begin{solution}
+    设 $F(x)=\dint_a^x\fr{\e^t}{1+t^2}\dt+\dint_b^x\fr{\e^{-t}}{1+t^2}\dt$, 则 $F(x)$ 在区间 $[a,b]$ 上连续, 且 \[
+        F(a)=\int_b^a\fr{\e^{-t}}{1+t^2}\dt<0,\quad F(b)=\int_a^b\fr{\e^t}{1+t^2}\dt>0,
+    \] 即 $F(a)F(b)<0$, 由零点存在定理知, $F(x)$ 在 $(a,b)$ 内至少有一个实根. 又 \[
+        F'(x)=\fr{\e^x}{1+x^2}+\fr{\e^{-x}}{1+x^2}=\fr{\e^x+\e^{-x}}{1+x^2}>0,
+    \] 故 $F(x)$ 在 $(a,b)$ 内单增, 因此 $F(x)$ 在 $(a,b)$ 内有且仅有一个实根.
+\end{solution}
+
+\begin{exercise}
+    设函数 $f(x)$ 在 $[0,1]$ 上连续, 在 $(0,1)$ 内可导, 且满足 $f(1)=k\dint_0^{\fr1k}x\e^{1-x}f(x)\dx$ ($k>1$), 证明至少存在一点 $\xi\in(0,1)$, 使得 $f'(\xi)=\left(1-\df1\xi\right)f(\xi)$.
+\end{exercise}
+
+\begin{solution}
+    令 $x\e^{1-x}f(x)=F(x)$, 则 $F(1)=f(1)=k\dint_0^{\fr1k}F(x)\dx$, 由定积分中值定理知, 存在 $\eta\in\left[0,\df1k\right]$, 使 \[
+        f(1)=k\cdot\fr1kF(\eta)=F(\eta).
+    \] 再由 Rolle 定理知, 存在 $\xi\in(\eta,1)\subset(0,1)$, 使 $F'(\xi)=0$, 即 \[
+        \e^{1-\xi}f(\xi)-\xi\e^{1-\xi}f(\xi)+\xi\e^{1-\xi}f'(\xi)=0,
+    \] 即 \[
+        f'(\xi)=\left(1-\df1\xi\right)f(\xi).
+    \]
+\end{solution}
+
+\begin{exercise}
+    设在区间 $[a,b]$ 上函数 $f(x)$ 和 $g(x)$ 可积, $f(x)$ 在 $[a,b]$ 上连续且单调, $g(x)$ 恒大于零, 证明至少存在一点 $\xi\in[a,b]$, 使得 \[
+        \int_a^bf(x)g(x)\dx=f(a)\int_a^\xi g(x)\dx+f(x)\int_\xi^bg(x)\dx.
+    \]
+\end{exercise}
+
+\begin{solution}
+    不妨设 $f(x)$ 单增, 则有 $f(a)\le f(x)\le f(b)$, $x\in[a,b]$. 那么 \[
+        f(a)\int_a^bg(x)\dx\le\int_a^bf(x)g(x)\dx\le f(b)\int_a^bg(x)\dx.
+    \] 设 \[
+        F(x)=\int_a^bf(t)g(t)\dt-f(a)\int_a^xg(t)\dt-f(b)\int_x^bg(t)\dt,
+    \] 则 \[\begin{aligned}
+        &F(a)=\int_a^bf(t)g(t)\dt-f(b)\int_a^bg(t)\dt\le0,\\
+        &F(b)=\int_a^bf(t)g(t)\dt-f(a)\int_a^bg(t)\dt\ge0.
+    \end{aligned}\] 若 $F(a)=0$ 或 $F(b)=0$, 则 $a$ 或 $b$ 就是所求的 $\xi$. 否则, 由于 $g(x)$ 可积, 有 $\int_a^xg(t)\dt$ 和 $\int_x^bg(t)\dt$ 连续, 因此 $F(x)\in C[a,b]$. 由连续函数的零点存在定理知, 存在 $\xi\in(a,b)$, 使 $F(\xi)=0$, 即 \[
+        \int_a^bf(x)g(x)\dx=f(a)\int_a^\xi g(x)\dx-f(b)\int_\xi^bg(x)\dx.
+    \]
+\end{solution}
+
+\begin{exercise}
+    设函数 $f(x)$ 在 $[0,1]$ 上连续, 在 $(0,1)$ 内可导, 且满足 $\dint_0^1f(x)\dx=\dint_0^1xf(x)\dx$, 证明至少存在一点 $\xi\in(0,1)$, 使得 $\dint_0^\xi f(x)\dx=0$.
+\end{exercise}
+
+\begin{solution}
+    设 $F(x)=\dint_0^x(x-t)f(t)\dt$, 则 \[
+        F(0)=0,\quad F(1)=\int_0^1f(t)\dt-\int_0^1tf(t)\dt=0.
+    \] 又 $F(x)$ 在 $[0,1]$ 上连续, 在 $(0,1)$ 内可导, 由 Rolle 定理知, 存在 $\xi\in(0,1)$, 使得 \[\begin{aligned}
+        F'(\xi)&=\left[\xi\int_0^\xi f(t)\dt-\int_0^\xi tf(t)\dt\right]'\\
+        &=\int_0^\xi f(t)\dt+\xi f(\xi)-\xi f(\xi)=\int_0^\xi f(t)\dt=0.
+    \end{aligned}\]
+
+    或令 $G(x)=\dint_0^x\left[\int_0^uf(t)\dt\right]\du$, 则 $G(0)=0$, \[
+        G(1)=u\int_0^uf(t)\dt\ver01-\int_0^1uf(u)\du=0.
+    \] 接下来的步骤与上面 $F(x)$ 相同. 事实上由分部积分法可证明 $F(x)=G(x)$.
+\end{solution}
+
+\end{document}
